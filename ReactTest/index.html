@@ -1,11 +1,14 @@
 <!DOCTYPE html>
+
 <html>
+
   <head>
     <meta charset="utf-8" />
     <title>Démo</title>
   </head>
+
   <body>
-    <div>Bonjour Sofiane ! Comment ca va ? </div>
+    <div id="root">Bonjour Sofiane !</div>
 
     <script
       crossorigin
@@ -19,13 +22,17 @@
 
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <script> 
-      console.log(React);
+    <script type="text/babel">
+      ReactDOM.render(
+        <div>Rebonjour Sofiane </div>,
+        document.getElementById('root)')
+      )
+
+      function myComponent() {
+        return <div>Hello Openclassroom ! </div>;
+      }
+    
     </script>
 
-    <div id="react-goes-here">
-      <!-- Le contenu de cet élément HTML sera remplacé par mes composants React -->
-      <!-- coucou-->
-    </div>
   </body>
 </html>
