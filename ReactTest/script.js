@@ -1,5 +1,20 @@
-const Header = React.createElement('h1', {}, 'La maison jungle');
+function Header() {
+  return (<div>
+      <h1>La maison jungle</h1>
+  </div>)
+}
 
-console.log(Header);
+function Description() {
+  return (<p>Ici achetez toutes les plantes dont vous avez toujours rêvé 🌵🌱🎍</p>)
+}
 
-ReactDOM.render(Header, document.getElementById("root"));
+function Banner() {
+  return (<div>
+      <Header />
+      <Description />
+  </div>)
+}
+
+console.log(Banner)
+
+ReactDOM.render(<Banner />, document.getElementById("root"))
