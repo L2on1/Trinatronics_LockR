@@ -1,0 +1,199 @@
+import {
+  Alert,
+  Box,
+  Button,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  LinearProgress,
+  OutlinedInput,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { useContext, useEffect, useRef, useState } from "react";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import data_borne from "./src/Components/Lock-R/Mulhouse/Borne_1/data_borne.json";
+import { Navigate, useNavigate } from "react-router-dom";
+
+function LoginBorneMulhouse1() {
+  let navigate = useNavigate();
+
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+    showPassword: false,
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleForm = (e) => {
+    e.preventDefault();
+    console.log(values);
+  };
+
+  const [dataBorne, setDataBorne] = useState(data_borne);
+
+  const handleClickValidate = () => {
+    setDataBorne(data_borne);
+    console.log("2");
+    console.log(dataBorne);
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dataBorne),
+    };
+    fetch(
+      `http://151.80.137.77:1880/mulhouse/borne_1/login/data_borne.json`,
+      requestOptions
+    ).then((response) =>
+      response.json().then((dataBorne) => setDataBorne(dataBorne))
+    );
+    console.log("3");
+    console.log(dataBorne);
+    console.log(dataBorne.propriety.available);
+  };
+
+  function validateAlert() {
+    if (dataBorne.propriety.available === false) {
+      return (
+        <Alert severity="success">
+          This is a success alert — check it out!
+        </Alert>
+      );
+    }
+  }
+
+  useEffect(() => {
+    function isAvailable() {
+      if (dataBorne.propriety.available === false) {
+        console.log("je vais au HOME");
+        setprogressBar(20);
+        validateAlert();
+
+        //navigate("/", { replace: true });
+      }
+    }
+    isAvailable();
+  }, [dataBorne]);
+
+  const [progressBar, setprogressBar] = useState(0);
+
+  return (
+    <>
+      <Box sx={{ p: 2, m: 2 }}>
+        <LinearProgress
+          variant="determinate"
+          sx={{
+            height: 10,
+            borderRadius: 5,
+          }}
+          value={progressBar}
+        />
+      </Box>
+      <Box
+        sx={{
+          p: 2,
+          m: 2,
+          //backgroundColor: "gray",
+          boxShadow: 3,
+          borderRadius: 1,
+          borderBlockColor: "gray",
+          borderBlockWidth: 2,
+          textAlign: "center",
+          alignContent: "center",
+          minWidth: 300,
+          maxWidth: 1000,
+        }}
+      >
+        <Typography variant="h6">
+          Veuillez vous connecter pour pouvoir utiliser la borne
+        </Typography>
+        <Stack spacing={2} sx={{ backgroundColor: "white" }}>
+          <FormControl
+            onSubmit={handleForm}
+            sx={{ display: "flex", flexWrap: "wrap" }}
+            variant="outlined"
+          >
+            <InputLabel id="outlined-input" label="Email" type="email" required>
+              Email
+            </InputLabel>
+            <OutlinedInput
+              required
+              id="outlined-adornment-email"
+              label="email"
+              value={values.email}
+              onChange={handleChange("email")}
+            />
+          </FormControl>
+          <FormControl
+            onSubmit={handleForm}
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+            }}
+            variant="outlined"
+          >
+            <InputLabel
+              required
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+            >
+              Password
+            </InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={values.showPassword ? "text" : "password"}
+              value={values.password}
+              onChange={handleChange("password")}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+            />
+          </FormControl>
+          <Button
+            variant="contained"
+            onClick={() => {
+              data_borne.login.email = values.email;
+              data_borne.login.password = values.password;
+              console.log("1");
+              console.log(data_borne);
+              handleClickValidate();
+            }}
+          >
+            Valider
+          </Button>
+        </Stack>
+      </Box>
+      {validateAlert()}
+    </>
+  );
+}
+
+//export default LoginBorneMulhouse1;

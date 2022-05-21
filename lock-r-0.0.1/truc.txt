@@ -1,0 +1,83 @@
+const fs = require("./data_borne.json");
+            fs.readFile("./data_borne.json", "utf8", (err, jsonString) => {
+              if (err) {
+                console.log("File read failed:", err);
+                return;
+              }
+              console.log("File data:", jsonString);
+            });
+
+ const result = fs.readFileSync("example.txt", { encoding: "utf-8" });
+  console.log(result);
+
+
+const inputs = useRef([]);
+  const addInputs = (el) => {
+    if (el && !inputs.current.includes(el)) {
+      inputs.current.push(el);
+    }
+  };
+
+  const handleForm = (e) => {
+    e.preventDefault();
+
+    console.log(inputs);
+  };
+
+
+
+  const handleClickValidate = () => {
+    setDataBorne(data_borne);
+    async function fetchData() {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataBorne),
+      };
+      const response = await fetch(
+        `http://151.80.137.77:1880/mulhouse/borne_1/login/data_borne.json`,
+        requestOptions
+      );
+      const { dataBorne_new } = await response.json();
+      console.log("3");
+      console.log(dataBorne_new);
+      setDataBorne(dataBorne_new);
+      console.log("4");
+      console.log(dataBorne);
+      console.log(dataBorne.propriety.available === false);
+      if (dataBorne.propriety.available === false) {
+        console.log("5");
+        navigate("/", { replace: true });
+      }
+    }
+    fetchData();
+  };
+
+const postNodeRed = () => {
+    const requestOptionsPost = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dataBorne),
+    };
+    async function fetchDataPost() {
+      const response = await fetch(
+        `http://151.80.137.77:1880/mulhouse/borne_1/login/data_borne.json`,
+        requestOptionsPost
+      );
+      const { dataBorne } = await response.json();
+    }
+    fetchDataPost();
+    console.log(dataBorne);
+  };
+
+
+  <LBox>
+        <LinearProgress
+          variant="determinate"
+          sx={{
+            height: 10,
+            borderRadius: 5,
+          }}
+          value={progressBar}
+        />
+      </LBox>

@@ -1,0 +1,11 @@
+{
+  "number": 1,
+  "propriety": {
+    "available": true
+  },
+  "login": {
+    "email": "",
+    "password": "",
+    "accepted": ""
+  }
+}
