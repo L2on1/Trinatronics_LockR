@@ -116,6 +116,7 @@ function AppBorneMulhouse1() {
 
   useEffect(() => {
     const intervalDataMKR = setInterval(() => {
+      //console.log(dataMKR);
       getNodeRed();
       if (timerValidate < 6 && !loginEtat) {
         setTimerValidate(timerValidate + 1);
