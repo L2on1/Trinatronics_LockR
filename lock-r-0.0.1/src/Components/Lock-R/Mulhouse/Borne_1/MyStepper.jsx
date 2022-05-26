@@ -6,10 +6,11 @@ import StepLabel from "@mui/material/StepLabel";
 import { DataBorneContext } from "./ContextBorne";
 
 const steps = [
-  "Connectez vous",
-  "Enlevez le U de la borne",
-  "Remettre le U",
-  "C'est fini 👌",
+  "Log in",
+  "Press the button",
+  "Remove the ULock",
+  "Reinsert it",
+  "All done👌",
 ];
 
 function MyStepper() {

@@ -70,8 +70,8 @@ function MyLogin() {
         sx={{
           p: 2,
           m: 2,
-          mx: { xs: 5, md: "25%" },
-          boxShadow: 5,
+          mx: { xs: "5%", md: "20%" },
+          boxShadow: 3,
           borderRadius: 3,
           borderBlockColor: "gray",
           borderBlockWidth: 2,
@@ -80,8 +80,8 @@ function MyLogin() {
           alignItems: "center",
         }}
       >
-        <Typography variant="h6">
-          Veuillez vous connecter pour pouvoir utiliser la borne
+        <Typography variant="h6" sx={{ mb: 3 }}>
+          Log in to access the terminal
         </Typography>
         <Stack spacing={2} sx={{ backgroundColor: "white" }}>
           <FormControl

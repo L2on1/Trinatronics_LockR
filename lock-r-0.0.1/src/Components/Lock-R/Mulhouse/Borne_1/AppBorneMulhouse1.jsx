@@ -26,6 +26,7 @@ function AppBorneMulhouse1() {
     setValueLoading,
     timerValidate,
     setTimerValidate,
+    stepStepper,
     setStepStepper,
   } = useContext(DataBorneContext);
 
@@ -33,15 +34,15 @@ function AppBorneMulhouse1() {
     let e;
     if (dataBorne.propriety.available === true) {
       e = (
-        <Typography variant="h3" sx={{ color: "green" }}>
-          Disponible
+        <Typography variant="h5" sx={{ color: "green", m: 1 }}>
+          Available
         </Typography>
       );
     }
     if (dataBorne.propriety.available === false) {
       e = (
-        <Typography variant="h3" sx={{ color: "red" }}>
-          Indisponible
+        <Typography variant="h5" sx={{ color: "red", m: 1 }}>
+          Unavailable
         </Typography>
       );
     }
@@ -49,11 +50,7 @@ function AppBorneMulhouse1() {
   }
 
   function showEtat() {
-    let el = (
-      <MyBox>
-        <Typography>Ini </Typography>
-      </MyBox>
-    );
+    let el = <></>;
     if (loginEtat) {
       el = (
         <>
@@ -138,11 +135,19 @@ function AppBorneMulhouse1() {
       setSuccess(true);
       setLoading(false);
     }
-    if (dataMKR.isButton === "true" && dataMKR.isU === "true") {
+    if (dataMKR.isButton === "true" && dataMKR.isU === "true" && !loginEtat) {
       setStepStepper(2);
     }
-    if (dataMKR.isButton === "false" && dataMKR.isU === "true") {
+    if (dataMKR.isButton === "false" && dataMKR.isU === "false" && !loginEtat) {
       setStepStepper(3);
+    }
+    if (
+      dataMKR.isButton === "false" &&
+      dataMKR.isU === "true" &&
+      !loginEtat &&
+      stepStepper === 3
+    ) {
+      setStepStepper(5);
     }
     return () => {
       clearInterval(intervalDataMKR);
@@ -166,14 +171,16 @@ function AppBorneMulhouse1() {
 
   function validateAlert() {
     if (dataBorne.propriety.available === false && timerValidate < 2) {
-      return <Alert severity="success">Vous etes bien authentifiez !</Alert>;
+      return <Alert severity="success">You are succesfully login ! 🚩</Alert>;
     }
   }
 
   return (
     <>
       <MyBox>
-        <Typography variant="h2">Borne 1 - Mulhouse</Typography>
+        <Typography variant="h4" sx={{ mt: 2, fontWeight: "bold" }}>
+          Mulhouse - 1
+        </Typography>
       </MyBox>
 
       <MyBox>{borneAvailable()}</MyBox>

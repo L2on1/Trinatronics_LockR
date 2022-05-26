@@ -13,7 +13,7 @@ function PostLogin() {
 
   function etatBorneIcon() {
     function LockClose() {
-      if (dataMKR.isU === "false") {
+      if (dataMKR.isU === "false" || dataMKR.isU === "") {
         return <LockOutlined sx={{ color: "gray", fontSize: "400%" }} />;
       }
       if (dataMKR.isU === "true") {
@@ -21,7 +21,7 @@ function PostLogin() {
       }
     }
     function LockOpen() {
-      if (dataMKR.isU === "true") {
+      if (dataMKR.isU === "true" || dataMKR.isU === "") {
         return <LockOpenOutlined sx={{ color: "gray", fontSize: "400%" }} />;
       }
       if (dataMKR.isU === "false") {
@@ -29,10 +29,10 @@ function PostLogin() {
       }
     }
     function LeakAdd() {
-      if (dataMKR.isButton === "true") {
+      if (dataMKR.isButton === "true" || dataMKR.isButton === "false") {
         return <LeakAddRounded sx={{ color: "green", fontSize: "400%" }} />;
       }
-      if (dataMKR.isButton === "false") {
+      if (dataMKR.isButton === "") {
         return <LeakAddRounded sx={{ color: "gray", fontSize: "400%" }} />;
       }
     }
@@ -41,9 +41,9 @@ function PostLogin() {
         sx={{
           display: "flex",
           flexDirection: "row",
-          marginTop: 3,
-          boxShadow: 5,
-          borderRadius: 3,
+          my: 3,
+          //boxShadow: 5,
+          //borderRadius: 3,
           borderBlockColor: "gray",
           flexWrap: "wrap",
           justifyContent: "space-around",
@@ -61,7 +61,7 @@ function PostLogin() {
   }
 
   function validationLock() {
-    return stepStepper === 3 ? (
+    return stepStepper === 4 ? (
       <>
         <Alert>
           <Typography>Votre Vélo est Lock</Typography>
@@ -82,7 +82,7 @@ function PostLogin() {
       sx={{
         p: 2,
         m: 2,
-        mx: { xs: 5, md: "25%" },
+        mx: { xs: "5%", md: "20%" },
         boxShadow: 5,
         borderRadius: 3,
         borderBlockColor: "gray",
@@ -92,71 +92,12 @@ function PostLogin() {
         alignItems: "center",
       }}
     >
-      <Typography variant="h6" sx={{ p: 2, pb: 5, m: 0 }}>
+      <Typography variant="h6" sx={{ p: 1, pb: 3, m: 0 }}>
         Appuyer sur le bouton pour vous connecter
       </Typography>
       <Validation />
       <Box>{etatBorneIcon()}</Box>
-      <MyBox>
-        <Typography variant="h6">
-          <dl>
-            <dt>Vous pouvez maintenant utiliser la borne</dt>
-            <dt>
-              <Typography
-                variant="body1"
-                sx={{
-                  color: "black",
-                  bgcolor: "lightblue",
-                  borderRadius: 100,
-                }}
-              >
-                1
-              </Typography>
-              Enlevez le U de la borne
-            </dt>
-            <dt>
-              {" "}
-              <Typography
-                variant="body1"
-                sx={{
-                  color: "black",
-                  bgcolor: "lightblue",
-                  borderRadius: 100,
-                }}
-              >
-                2
-              </Typography>{" "}
-              Placez votre vélo
-            </dt>
-            <dt>
-              {" "}
-              <Typography
-                variant="body1"
-                sx={{
-                  color: "black",
-                  bgcolor: "lightblue",
-                  borderRadius: 100,
-                }}
-              >
-                3
-              </Typography>
-              Remettez le U dans la borne
-            </dt>
-            <Typography
-              variant="body1"
-              sx={{
-                color: "lightblue",
-                bgcolor: "lightblue",
-                borderRadius: 100,
-              }}
-            >
-              .
-            </Typography>
-            <dt>C'est Fini !</dt>
-          </dl>
-        </Typography>
-        {validationLock()}
-      </MyBox>
+      <MyBox>{validationLock()}</MyBox>
     </MyBox>
   );
 }
