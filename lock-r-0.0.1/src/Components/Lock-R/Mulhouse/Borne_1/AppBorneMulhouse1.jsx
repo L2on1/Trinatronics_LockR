@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import MyLogin from "./MyLogin";
 import { DataBorneContext } from "./ContextBorne";
 import PostLogin from "./PostLogin";
+import MyStepper from "./MyStepper";
 
 function AppBorneMulhouse1() {
   const {
@@ -25,6 +26,7 @@ function AppBorneMulhouse1() {
     setValueLoading,
     timerValidate,
     setTimerValidate,
+    setStepStepper,
   } = useContext(DataBorneContext);
 
   function borneAvailable() {
@@ -58,6 +60,7 @@ function AppBorneMulhouse1() {
           <div>
             <MyLogin />
           </div>
+
           <MyBox>
             <Button
               variant="contained"
@@ -66,7 +69,8 @@ function AppBorneMulhouse1() {
                 dataBorne.login.password = valuesLogin.password;
                 setDataBorne(dataBorne);
                 setLoginEtat(false);
-                setprogressBar(20);
+                //setprogressBar(20);
+                setStepStepper(1);
                 postNodeRed();
                 getNodeRed();
               }}
@@ -80,6 +84,7 @@ function AppBorneMulhouse1() {
       el = (
         <>
           <MyBox>
+            {/*
             <Button
               variant="contained"
               onClick={() => {
@@ -90,6 +95,7 @@ function AppBorneMulhouse1() {
             >
               Retour à l'authentification
             </Button>
+          */}
             {validateAlert()}
           </MyBox>
           <PostLogin />
@@ -132,6 +138,12 @@ function AppBorneMulhouse1() {
       setSuccess(true);
       setLoading(false);
     }
+    if (dataMKR.isButton === "true" && dataMKR.isU === "true") {
+      setStepStepper(2);
+    }
+    if (dataMKR.isButton === "false" && dataMKR.isU === "true") {
+      setStepStepper(3);
+    }
     return () => {
       clearInterval(intervalDataMKR);
       clearInterval(timerLoading);
@@ -166,7 +178,7 @@ function AppBorneMulhouse1() {
 
       <MyBox>{borneAvailable()}</MyBox>
       <MyBox>
-        <LinearProgress
+        {/*<LinearProgress
           variant="determinate"
           sx={{
             m: 2,
@@ -175,7 +187,8 @@ function AppBorneMulhouse1() {
             borderRadius: 5,
           }}
           value={progressBar}
-        />
+        />*/}
+        <MyStepper />
       </MyBox>
       {showEtat()}
     </>

@@ -10,15 +10,8 @@ import { DataBorneContext } from "./ContextBorne";
 import { Adjust } from "@mui/icons-material";
 
 export default function CircularIntegration() {
-  const {
-    dataMKR,
-    loading,
-    setLoading,
-    success,
-    setSuccess,
-    valueLoading,
-    setValueLoading,
-  } = React.useContext(DataBorneContext);
+  const { dataMKR, loading, setLoading, success, setSuccess, valueLoading } =
+    React.useContext(DataBorneContext);
 
   const buttonSx = {
     ...(success && {

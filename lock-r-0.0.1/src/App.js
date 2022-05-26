@@ -9,13 +9,16 @@ import BorneStrasbourg1 from "./Components/Lock-R/Strasbourg/Borne_1/BorneStrasb
 import BorneStrasbourg2 from "./Components/Lock-R/Strasbourg/Borne_2/BorneStrasbourg2";
 import Strasbourg from "./Components/Lock-R/Strasbourg/Strasbourg";
 import Navbar from "./Components/Navbar/Navbar";
+import Header from "./Components/Header/Header.jsx";
 import Profile from "./Components/Profile/Profile";
 import Services from "./Components/Services/Services";
+import Footer from "./Components/Lock-R/Mulhouse/Borne_1/Footer";
 
 function App() {
   return (
     <>
-      <Navbar />
+      <Header />
+      {/*<Navbar />*/}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
@@ -44,6 +47,7 @@ function App() {
           />
         </Route>
       </Routes>
+      {/*<Footer />*/}
     </>
   );
 }

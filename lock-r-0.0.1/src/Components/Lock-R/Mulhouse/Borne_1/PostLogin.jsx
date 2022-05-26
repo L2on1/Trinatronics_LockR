@@ -9,16 +9,7 @@ import { DataBorneContext } from "./ContextBorne";
 import Validation from "./Validation";
 
 function PostLogin() {
-  const {
-    MyBox,
-    dataBorne,
-    setDataBorne,
-    progressBar,
-    setprogressBar,
-    loginEtat,
-    setLoginEtat,
-    dataMKR,
-  } = useContext(DataBorneContext);
+  const { MyBox, dataMKR, stepStepper } = useContext(DataBorneContext);
 
   function etatBorneIcon() {
     function LockClose() {
@@ -70,18 +61,20 @@ function PostLogin() {
   }
 
   function validationLock() {
-    return (
+    return stepStepper === 3 ? (
       <>
         <Alert>
           <Typography>Votre Vélo est Lock</Typography>
           <Typography>A plus tard ! </Typography>
         </Alert>
+        {/*
         <Alert>
-          <Typography>Votre Vélo est Dé-Lock</Typography>
+          <Typography>Votre Vélo est Unlock</Typography>
           <Typography>On espere vous revoir bientot !</Typography>
         </Alert>
+        */}
       </>
-    );
+    ) : null;
   }
 
   return (

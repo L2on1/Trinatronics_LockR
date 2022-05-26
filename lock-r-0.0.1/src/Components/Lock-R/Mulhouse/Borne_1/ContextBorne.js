@@ -27,6 +27,8 @@ export const DataBorneProvider = ({ children }) => {
   const [success, setSuccess] = useState(false);
   const [valueLoading, setValueLoading] = useState(0);
   const [timerValidate, setTimerValidate] = useState(0);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [stepStepper, setStepStepper] = useState(0);
 
   return (
     <DataBorneContext.Provider
@@ -50,6 +52,10 @@ export const DataBorneProvider = ({ children }) => {
         setValueLoading,
         timerValidate,
         setTimerValidate,
+        anchorElNav,
+        setAnchorElNav,
+        stepStepper,
+        setStepStepper,
       }}
     >
       {children}
